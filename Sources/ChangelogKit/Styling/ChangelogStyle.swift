@@ -9,7 +9,7 @@ import SwiftUI
 /// ``ChangelogSheetStyleConfiguration``. Apply a style with
 /// ``SwiftUI/View/changelogStyle(_:)``.
 ///
-/// ChangelogKit ships two built-in styles: ``automatic`` and ``prominent``.
+/// ChangelogKit ships two built-in styles: ``grouped`` and ``cards``.
 @MainActor
 public protocol ChangelogSheetStyle {
     /// A view that represents the body of a changelog sheet.
@@ -49,31 +49,32 @@ public struct ChangelogSheetStyleConfiguration {
 // MARK: - Built-in styles
 
 /// The default changelog style: a centered title with a clean list of items.
-public struct AutomaticChangelogSheetStyle: ChangelogSheetStyle {
+public struct GroupedChangelogSheetStyle: ChangelogSheetStyle {
     public nonisolated init() {}
 
     public func makeBody(configuration: Configuration) -> some View {
-        ChangelogSheetLayout(configuration: configuration, isProminent: false)
+        ChangelogSheetLayout(configuration: configuration)
     }
 }
 
-/// A bolder changelog style with a larger header and heavier emphasis.
-public struct ProminentChangelogSheetStyle: ChangelogSheetStyle {
+/// A style that boxes each entry in its own card on a grouped background,
+/// giving every change equal visual weight.
+public struct CardsChangelogSheetStyle: ChangelogSheetStyle {
     public nonisolated init() {}
 
     public func makeBody(configuration: Configuration) -> some View {
-        ChangelogSheetLayout(configuration: configuration, isProminent: true)
+        ChangelogSheetLayout(configuration: configuration, isCarded: true)
     }
 }
 
-extension ChangelogSheetStyle where Self == AutomaticChangelogSheetStyle {
+extension ChangelogSheetStyle where Self == GroupedChangelogSheetStyle {
     /// The default changelog style.
-    public nonisolated static var automatic: AutomaticChangelogSheetStyle { .init() }
+    public nonisolated static var grouped: GroupedChangelogSheetStyle { .init() }
 }
 
-extension ChangelogSheetStyle where Self == ProminentChangelogSheetStyle {
-    /// A bolder changelog style with a larger header.
-    public nonisolated static var prominent: ProminentChangelogSheetStyle { .init() }
+extension ChangelogSheetStyle where Self == CardsChangelogSheetStyle {
+    /// A style that presents each entry as a distinct card.
+    public nonisolated static var cards: CardsChangelogSheetStyle { .init() }
 }
 
 // MARK: - Type erasure
@@ -96,7 +97,7 @@ public struct AnyChangelogSheetStyle {
 
 extension EnvironmentValues {
     /// The style applied to changelog sheets in this environment.
-    @Entry public var changelogSheetStyle: AnyChangelogSheetStyle = AnyChangelogSheetStyle(.automatic)
+    @Entry public var changelogSheetStyle: AnyChangelogSheetStyle = AnyChangelogSheetStyle(.grouped)
 
     /// The label used for the primary continue button.
     @Entry public var changelogContinueTitle: LocalizedStringKey = "Continue"
@@ -108,7 +109,7 @@ extension View {
     /// ```swift
     /// ContentView()
     ///     .changelogSheet(changelog)
-    ///     .changelogStyle(.prominent)
+    ///     .changelogStyle(.cards)
     /// ```
     public func changelogStyle(_ style: some ChangelogSheetStyle & Sendable) -> some View {
         environment(\.changelogSheetStyle, AnyChangelogSheetStyle(style))

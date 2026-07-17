@@ -62,13 +62,13 @@ public struct ChangelogSheet: View {
     }
 }
 
-#Preview("Automatic") {
+#Preview("Grouped") {
     ChangelogSheet(entry: .preview, changelog: .preview)
         .tint(.indigo)
 }
 
-#Preview("Prominent") {
+#Preview("Cards") {
     ChangelogSheet(entry: .preview, changelog: .preview)
-        .changelogStyle(.prominent)
+        .changelogStyle(.cards)
         .tint(.indigo)
 }

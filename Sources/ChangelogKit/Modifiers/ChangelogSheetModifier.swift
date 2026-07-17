@@ -31,7 +31,6 @@ private struct AutoChangelogModifier: ViewModifier {
                 if let entry = tracker.currentEntry {
                     ChangelogSheet(entry: entry, changelog: changelog)
                         .presentationDetents([.large])
-                        .presentationBackground(.regularMaterial)
                 }
             }
             // Wait until the window is active so we never present mid-launch

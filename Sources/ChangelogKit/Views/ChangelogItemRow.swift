@@ -10,11 +10,20 @@ import SwiftUI
 public struct ChangelogItemRow: View {
 
     private let item: ChangelogItem
+    private let isCarded: Bool
 
     @ScaledMetric(relativeTo: .largeTitle) private var iconSize: CGFloat = 54
 
     public init(_ item: ChangelogItem) {
+        self.init(item, isCarded: false)
+    }
+
+    /// Creates a row, optionally wrapping it in a self-contained card. Used by
+    /// the current-version sheet, where each entry stands alone; containers
+    /// that group rows themselves (like the history view) leave this off.
+    init(_ item: ChangelogItem, isCarded: Bool) {
         self.item = item
+        self.isCarded = isCarded
     }
 
     public var body: some View {
@@ -22,9 +31,23 @@ public struct ChangelogItemRow: View {
             NavigationLink {
                 ChangelogItemDetailView(item: item)
             } label: {
-                content
+                styledContent
             }
             .buttonStyle(.plain)
+        } else {
+            styledContent
+        }
+    }
+
+    @ViewBuilder
+    private var styledContent: some View {
+        if isCarded {
+            content
+                .padding(16)
+                .background(
+                    Color(.secondarySystemGroupedBackground),
+                    in: RoundedRectangle(cornerRadius: 22, style: .continuous)
+                )
         } else {
             content
         }
@@ -52,7 +75,6 @@ public struct ChangelogItemRow: View {
                     .accessibilityHidden(true)
             }
         }
-        .padding(.vertical, 6)
         .contentShape(.rect)
         .accessibilityElement(children: .combine)
         .accessibilityAddTraits(item.hasDetail ? .isButton : [])

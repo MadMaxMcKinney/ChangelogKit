@@ -2,26 +2,30 @@ import SwiftUI
 
 /// The concrete layout backing both built-in changelog styles.
 ///
-/// Renders a centered header, a scrolling list of ``ChangelogItemRow`` values,
+/// Renders a centered header, a scrolling stack of ``ChangelogItemRow`` values,
 /// and a pinned bottom bar with a prominent continue button and an optional
-/// "See Previous Updates" affordance. `isProminent` scales up the header for
-/// the ``ProminentChangelogSheetStyle``.
+/// "See Previous Updates" affordance.
+///
+/// `isCarded` boxes each entry on a grouped background for the
+/// ``CardsChangelogSheetStyle``; otherwise it renders the ``grouped`` style's
+/// clean list.
 struct ChangelogSheetLayout: View {
 
     let configuration: ChangelogSheetStyleConfiguration
-    let isProminent: Bool
+    var isCarded: Bool = false
 
     var body: some View {
         ScrollView {
-            VStack(alignment: .leading, spacing: 28) {
+            VStack(alignment: .leading, spacing: 24) {
                 header
                 items
             }
-            .padding(.horizontal, 24)
-            .padding(.top, isProminent ? 40 : 24)
+            .padding(.horizontal, isCarded ? 20 : 24)
+            .padding(.top, 24)
             .padding(.bottom, 16)
             .frame(maxWidth: .infinity)
         }
+        .background(Color(.systemGroupedBackground))
         .safeAreaInset(edge: .bottom) {
             bottomBar
         }
@@ -30,12 +34,12 @@ struct ChangelogSheetLayout: View {
     private var header: some View {
         VStack(spacing: 8) {
             configuration.title
-                .font(isProminent ? .largeTitle.weight(.heavy) : .largeTitle.bold())
+                .font(.largeTitle.bold())
                 .multilineTextAlignment(.center)
 
             if let headline = configuration.entry.headline {
                 Text(headline)
-                    .font(isProminent ? .title3 : .headline)
+                    .font(.headline)
                     .foregroundStyle(.secondary)
                     .multilineTextAlignment(.center)
             }
@@ -45,9 +49,9 @@ struct ChangelogSheetLayout: View {
     }
 
     private var items: some View {
-        VStack(alignment: .leading, spacing: 16) {
+        VStack(alignment: .leading, spacing: isCarded ? 14 : 16) {
             ForEach(configuration.entry.items) { item in
-                ChangelogItemRow(item)
+                ChangelogItemRow(item, isCarded: isCarded)
             }
         }
     }
