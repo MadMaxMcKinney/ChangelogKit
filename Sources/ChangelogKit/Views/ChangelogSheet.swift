@@ -70,5 +70,6 @@ public struct ChangelogSheet: View {
 #Preview("Cards") {
     ChangelogSheet(entry: .preview, changelog: .preview)
         .changelogStyle(.cards)
+        .changelogHistoryStyle(.editorial)
         .tint(.indigo)
 }

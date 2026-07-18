@@ -7,7 +7,7 @@ extension Changelog {
         ChangelogEntry(
             version: "2.4.0",
             date: Date(timeIntervalSince1970: 1_752_624_000), // 2025-07-16
-            headline: "What's New in Springboard"
+            headline: "Discover the latest features in Example App."
         ) {
             ChangelogItem(
                 symbol: "sparkles",

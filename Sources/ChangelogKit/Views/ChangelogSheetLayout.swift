@@ -2,9 +2,9 @@ import SwiftUI
 
 /// The concrete layout backing both built-in changelog styles.
 ///
-/// Renders a centered header, a scrolling stack of ``ChangelogItemRow`` values,
-/// and a pinned bottom bar with a prominent continue button and an optional
-/// "See Previous Updates" affordance.
+/// Renders the "What's New" title as a large navigation title, a scrolling
+/// stack of ``ChangelogItemRow`` values, and a pinned bottom bar with a
+/// prominent continue button and an optional "See Previous Updates" affordance.
 ///
 /// `isCarded` boxes each entry on a grouped background for the
 /// ``CardsChangelogSheetStyle``; otherwise it renders the ``grouped`` style's
@@ -21,31 +21,30 @@ struct ChangelogSheetLayout: View {
                 items
             }
             .padding(.horizontal, isCarded ? 20 : 24)
-            .padding(.top, 24)
+            .padding(.top, 2)
             .padding(.bottom, 16)
             .frame(maxWidth: .infinity)
         }
         .background(Color(.systemGroupedBackground))
+        // Driving the title through the navigation bar gives the sheet's root a
+        // defined bar state, so popping back from the pushed history view no
+        // longer leaves that view's inline bar stranded on the sheet.
+        .navigationTitle(configuration.title)
+        .navigationBarTitleDisplayMode(.large)
         .safeAreaInset(edge: .bottom) {
             bottomBar
         }
     }
 
+    @ViewBuilder
     private var header: some View {
-        VStack(spacing: 8) {
-            configuration.title
-                .font(.largeTitle.bold())
-                .multilineTextAlignment(.center)
-
-            if let headline = configuration.entry.headline {
-                Text(headline)
-                    .font(.headline)
-                    .foregroundStyle(.secondary)
-                    .multilineTextAlignment(.center)
-            }
+        if let headline = configuration.entry.headline {
+            Text(headline)
+                .font(.headline)
+                .foregroundStyle(.secondary)
+                .fixedSize(horizontal: false, vertical: true)
+                .frame(maxWidth: .infinity, alignment: .leading)
         }
-        .frame(maxWidth: .infinity)
-        .padding(.bottom, 4)
     }
 
     private var items: some View {
