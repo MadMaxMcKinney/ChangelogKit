@@ -5,8 +5,8 @@ import SwiftUI
 ///
 /// Shared by the current-version sheet and the history view so past entries
 /// look identical to new ones. When the item carries a non-empty
-/// ``ChangelogItemDetail``, the row shows a chevron and pushes a
-/// ``ChangelogItemDetailView`` when tapped.
+/// ``ChangelogItemDetail``, the row shows a chevron and pushes a detail screen
+/// when tapped, styled by the ``ChangelogItemDetailStyle`` in the environment.
 public struct ChangelogItemRow: View {
 
     private let item: ChangelogItem

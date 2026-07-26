@@ -4,9 +4,9 @@ import Foundation
 /// screen.
 ///
 /// When a ``ChangelogItem`` carries a non-empty detail, its row becomes
-/// tappable and pushes a ``ChangelogItemDetailView`` — mirroring the way apps
-/// like CARROT expand a "What's New" entry into a full explanation of the
-/// feature and how to use it.
+/// tappable and pushes a dedicated detail screen — mirroring the way apps like
+/// CARROT expand a "What's New" entry into a full explanation of the feature and
+/// how to use it. Style that screen with ``ChangelogItemDetailStyle``.
 ///
 /// Every field is optional; a section only appears when it has content.
 ///

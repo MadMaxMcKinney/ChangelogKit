@@ -7,7 +7,7 @@ import SwiftUI
 /// Conform to `ChangelogHistoryStyle` the same way you'd write a `ButtonStyle`
 /// or a ``ChangelogSheetStyle``: implement ``makeBody(configuration:)`` and
 /// build a view from the supplied ``ChangelogHistoryStyleConfiguration``. Apply
-/// a style with ``SwiftUI/View/changelogHistoryStyle(_:)``.
+/// a style with the `changelogHistoryStyle(_:)` view modifier.
 ///
 /// ChangelogKit ships four built-in styles: ``grouped`` (the default),
 /// ``timeline``, ``collapsible``, and ``editorial``.

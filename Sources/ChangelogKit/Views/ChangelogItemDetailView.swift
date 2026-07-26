@@ -6,7 +6,7 @@ import SwiftUI
 /// non-empty ``ChangelogItemDetail``.
 ///
 /// The appearance is driven by the ``ChangelogItemDetailStyle`` in the
-/// environment — apply one with ``SwiftUI/View/changelogItemDetailStyle(_:)``.
+/// environment — apply one with the `changelogItemDetailStyle(_:)` view modifier.
 /// ChangelogKit ships ``ChangelogItemDetailStyle/grouped`` (the default),
 /// ``ChangelogItemDetailStyle/plain``, and ``ChangelogItemDetailStyle/hero``.
 struct ChangelogItemDetailView: View {

@@ -4,7 +4,8 @@ import SwiftUI
 ///
 /// Use this directly when you want full control over presentation — for
 /// example, pushing it from a Settings screen. For automatic version-gated
-/// presentation, prefer ``SwiftUI/View/changelogSheet(_:defaults:currentVersion:)``.
+/// presentation, prefer the `changelogSheet(_:defaults:currentVersion:)` view
+/// modifier.
 ///
 /// The sheet owns its own `NavigationStack`, so a "See Previous Updates" button
 /// pushes ``ChangelogHistoryView`` rather than presenting a second sheet.

@@ -2,12 +2,12 @@ import SwiftUI
 
 // MARK: - Style protocol
 
-/// A type that defines the appearance of a ``ChangelogItemDetailView``.
+/// A type that defines the appearance of a ``ChangelogItem``'s detail screen.
 ///
 /// Conform to `ChangelogItemDetailStyle` the same way you'd write a `ButtonStyle`
 /// or a ``ChangelogSheetStyle``: implement ``makeBody(configuration:)`` and build
 /// a view from the supplied ``ChangelogItemDetailStyleConfiguration``. Apply a
-/// style with ``SwiftUI/View/changelogItemDetailStyle(_:)``.
+/// style with the `changelogItemDetailStyle(_:)` view modifier.
 ///
 /// ChangelogKit ships three built-in styles: ``grouped`` (the default),
 /// ``plain``, and ``hero``.

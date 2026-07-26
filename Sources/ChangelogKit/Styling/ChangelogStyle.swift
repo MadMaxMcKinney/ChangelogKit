@@ -6,8 +6,8 @@ import SwiftUI
 ///
 /// Conform to `ChangelogSheetStyle` the same way you'd write a `ButtonStyle`:
 /// implement ``makeBody(configuration:)`` and build a view from the supplied
-/// ``ChangelogSheetStyleConfiguration``. Apply a style with
-/// ``SwiftUI/View/changelogStyle(_:)``.
+/// ``ChangelogSheetStyleConfiguration``. Apply a style with the
+/// `changelogStyle(_:)` view modifier.
 ///
 /// ChangelogKit ships two built-in styles: ``grouped`` and ``cards``.
 @MainActor

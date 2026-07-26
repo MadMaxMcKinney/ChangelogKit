@@ -7,10 +7,10 @@ import SwiftUI
 /// content appear, since ``Changelog/entries`` contains exactly those versions.
 ///
 /// The appearance is driven by the ``ChangelogHistoryStyle`` in the
-/// environment — apply one with ``SwiftUI/View/changelogHistoryStyle(_:)``.
+/// environment — apply one with the `changelogHistoryStyle(_:)` view modifier.
 /// ChangelogKit ships ``ChangelogHistoryStyle/grouped`` (the default),
-/// ``ChangelogHistoryStyle/timeline``, ``ChangelogHistoryStyle/list``,
-/// ``ChangelogHistoryStyle/collapsible``, and ``ChangelogHistoryStyle/editorial``.
+/// ``ChangelogHistoryStyle/timeline``, ``ChangelogHistoryStyle/collapsible``,
+/// and ``ChangelogHistoryStyle/editorial``.
 ///
 /// Whatever the style, each version's rows are ``ChangelogItemRow`` values, so
 /// items with a ``ChangelogItemDetail`` remain tappable here just as they are on
