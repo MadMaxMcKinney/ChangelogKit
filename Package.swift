@@ -1,4 +1,6 @@
-// swift-tools-version: 6.4
+// swift-tools-version: 6.2
+// 6.2 is the floor set by the iOS 26 SDK (Xcode 26), not by anything in the
+// sources — keep it here so Xcode 26 users can build the package.
 // The swift-tools-version declares the minimum version of Swift required to build this package.
 
 import PackageDescription

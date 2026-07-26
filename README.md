@@ -12,7 +12,7 @@ A SwiftUI package for the "What's New" screen: declare your release notes once, 
 |               |                              |
 |---------------|------------------------------|
 | Platforms     | iOS 26+                      |
-| Toolchain     | Swift 6.4 / Xcode 27+        |
+| Toolchain     | Xcode 26+ / Swift 6.2+       |
 | Language mode | Swift 6 (strict concurrency) |
 
 ## Installation
