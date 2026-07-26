@@ -4,24 +4,40 @@ import Testing
 @Suite("AppVersion")
 struct AppVersionTests {
 
+    // These tests feed the parser a `String` value rather than a string literal
+    // on purpose. `AppVersion("2.4.1")` resolves to the non-failable
+    // `init(stringLiteral:)`, so a literal argument would never exercise
+    // `init?(_:)` — and would quietly turn a parse failure into 0.0.0.
+
     @Test("Parses full major.minor.patch")
     func parsesFullVersion() throws {
-        let version = try #require(AppVersion("2.4.1"))
+        let raw: String = "2.4.1"
+        let version = try #require(AppVersion(raw))
         #expect(version.major == 2)
         #expect(version.minor == 4)
         #expect(version.patch == 1)
     }
 
-    @Test("Defaults missing components to zero")
-    func defaultsMissingComponents() throws {
-        #expect(try #require(AppVersion("2")) == AppVersion(major: 2, minor: 0, patch: 0))
-        #expect(try #require(AppVersion("2.4")) == AppVersion(major: 2, minor: 4, patch: 0))
+    @Test(
+        "Defaults missing components to zero",
+        arguments: [
+            ("2", AppVersion(major: 2, minor: 0, patch: 0)),
+            ("2.4", AppVersion(major: 2, minor: 4, patch: 0))
+        ]
+    )
+    func defaultsMissingComponents(raw: String, expected: AppVersion) throws {
+        #expect(try #require(AppVersion(raw)) == expected)
     }
 
-    @Test("Ignores pre-release and build metadata")
-    func ignoresMetadata() throws {
-        #expect(try #require(AppVersion("2.4.0-beta.1")) == AppVersion(major: 2, minor: 4))
-        #expect(try #require(AppVersion("2.4.1+42")) == AppVersion(major: 2, minor: 4, patch: 1))
+    @Test(
+        "Ignores pre-release and build metadata",
+        arguments: [
+            ("2.4.0-beta.1", AppVersion(major: 2, minor: 4)),
+            ("2.4.1+42", AppVersion(major: 2, minor: 4, patch: 1))
+        ]
+    )
+    func ignoresMetadata(raw: String, expected: AppVersion) throws {
+        #expect(try #require(AppVersion(raw)) == expected)
     }
 
     @Test("Returns nil for malformed strings", arguments: ["", "abc", "x.y.z", "2.beta.0", "..", "v2.4.0"])
@@ -33,6 +49,14 @@ struct AppVersionTests {
     func stringLiteral() {
         let version: AppVersion = "3.1.4"
         #expect(version == AppVersion(major: 3, minor: 1, patch: 4))
+    }
+
+    @Test("A malformed literal falls back to 0.0.0")
+    func malformedStringLiteral() {
+        // Documented behaviour: literals are authored, so a bad one is a
+        // programmer error rather than something to propagate as nil.
+        let version: AppVersion = "not a version"
+        #expect(version == AppVersion(major: 0))
     }
 
     @Test("Description round-trips")
