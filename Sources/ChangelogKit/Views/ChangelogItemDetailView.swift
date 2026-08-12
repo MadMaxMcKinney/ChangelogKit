@@ -28,6 +28,7 @@ struct ChangelogItemDetailView: View {
     }
 }
 
+#if DEBUG
 #Preview("Grouped") {
     NavigationStack {
         ChangelogItemDetailView(item: .previewDetailed)
@@ -50,3 +51,4 @@ struct ChangelogItemDetailView: View {
     }
     .tint(.blue)
 }
+#endif

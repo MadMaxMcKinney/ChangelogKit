@@ -81,6 +81,7 @@ public struct ChangelogItemRow: View {
     }
 }
 
+#if DEBUG
 #Preview("Item Row", traits: .sizeThatFitsLayout) {
     NavigationStack {
         VStack(alignment: .leading, spacing: 20) {
@@ -110,3 +111,4 @@ public struct ChangelogItemRow: View {
         .tint(.indigo)
     }
 }
+#endif

@@ -32,6 +32,7 @@ public struct ChangelogHistoryView: View {
     }
 }
 
+#if DEBUG
 #Preview("Grouped") {
     NavigationStack {
         ChangelogHistoryView(changelog: .preview)
@@ -62,3 +63,4 @@ public struct ChangelogHistoryView: View {
     }
     .tint(.indigo)
 }
+#endif

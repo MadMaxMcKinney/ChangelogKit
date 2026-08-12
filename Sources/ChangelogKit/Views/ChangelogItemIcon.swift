@@ -52,6 +52,7 @@ public struct ChangelogItemIcon: View {
     }
 }
 
+#if DEBUG
 #Preview("Icons", traits: .sizeThatFitsLayout) {
     HStack(spacing: 16) {
         ChangelogItemIcon(symbol: "map", tint: .blue)
@@ -61,3 +62,4 @@ public struct ChangelogItemIcon: View {
     .padding()
     .tint(.indigo)
 }
+#endif

@@ -63,6 +63,7 @@ public struct ChangelogSheet: View {
     }
 }
 
+#if DEBUG
 #Preview("Grouped") {
     ChangelogSheet(entry: .preview, changelog: .preview)
         .tint(.indigo)
@@ -74,3 +75,4 @@ public struct ChangelogSheet: View {
         .changelogHistoryStyle(.editorial)
         .tint(.indigo)
 }
+#endif
