@@ -1,6 +1,8 @@
+<img width="128" height="128" alt="ChangelogKit-Icon-iOS-Default-512@1x-2" src="https://github.com/user-attachments/assets/49bfab9a-fc1f-40f1-b625-fdcc2fcce227" />
+
 # ChangelogKit
 
-A SwiftUI package for the "What's New" screen: declare your release notes once, and ChangelogKit presents them after an upgrade, keeps a browsable version history, and expands any entry into a full feature detail screen — all restyleable the same way you'd write a `ButtonStyle`.
+A SwiftUI package for "What's New" screens: declare your release notes and ChangelogKit presents them after an upgrade, keeps a browsable version history, and expands any entry into a full feature detail screen. All customizable in the same way you'd write a SwiftUI `ButtonStyle`.
 
 - **Declarative content** — author your changelog with result builders, one entry per version.
 - **Automatic presentation** — the sheet appears exactly once after a version bump. ChangelogKit owns the `UserDefaults` bookkeeping.
@@ -28,7 +30,7 @@ targets: [
 ]
 ```
 
-The repository has no tagged releases yet, so track `main` for now. Once a release is tagged, prefer pinning to it: `.package(url: …, from: "1.0.0")`.
+You can define a pinned release via: `.package(url: …, from: "1.0.0")`.
 
 ## Quick start
 
